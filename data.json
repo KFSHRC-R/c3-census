@@ -1,0 +1,13 @@
+{
+  "updated": "2026-11-08T22:30:00+03:00",
+  "demo": true,
+  "shift": "Night",
+  "beds": 34,
+  "patients": 29,
+  "admissions_expected": 5,
+  "admissions_received": 2,
+  "discharges_done": 4,
+  "discharges_pending": 2,
+  "high_acuity": 6,
+  "procedures": 3
+}

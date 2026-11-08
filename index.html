@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>C3 Census</title>
+<style>
+  :root{
+    --bg:#f3f6fb; --card:#ffffff; --ink:#14233b; --muted:#5d6b82; --line:#dfe6f1;
+    --blue:#2f75b5; --green:#2e9e5b; --amber:#d98a00; --red:#c8434a; --navy:#1f3864;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0f1624; --card:#18233a; --ink:#eaf0fb; --muted:#9db0cf; --line:#2a3a58; --navy:#0b1730; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       padding:0 16px calc(24px + env(safe-area-inset-bottom))}
+  header{background:var(--navy);color:#fff;margin:0 -16px 16px;padding:calc(18px + env(safe-area-inset-top)) 16px 16px}
+  header h1{margin:0;font-size:22px;letter-spacing:.2px}
+  header p{margin:4px 0 0;font-size:13px;opacity:.85}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .card .n{font-size:42px;font-weight:700;line-height:1.05}
+  .card .l{font-size:13px;color:var(--muted);margin-top:4px}
+  .card .s{font-size:12px;color:var(--muted);margin-top:6px}
+  .accent-blue .n{color:var(--blue)} .accent-amber .n{color:var(--amber)}
+  .accent-green .n{color:var(--green)} .accent-red .n{color:var(--red)}
+  .wide{grid-column:1 / -1}
+  .bar{height:14px;border-radius:8px;background:var(--line);overflow:hidden;margin-top:10px}
+  .bar i{display:block;height:100%;background:var(--blue);width:0;transition:width .6s}
+  .row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:6px}
+  .small{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .small .card .n{font-size:28px}
+  footer{margin-top:16px;font-size:12px;color:var(--muted);text-align:center}
+  .stale{color:var(--red);font-weight:600}
+  .demo{display:none;background:#c8434a;color:#fff;text-align:center;font-weight:700;font-size:13px;padding:8px 12px;margin:0 -16px 12px}
+</style>
+</head>
+<body>
+<header>
+  <h1>C3 Census</h1>
+  <p id="sub">Loading…</p>
+</header>
+
+<div class="demo" id="demo">DEMO NUMBERS, NOT REAL</div>
+<main>
+  <div class="grid">
+    <div class="card accent-blue"><div class="n" id="patients">–</div><div class="l">Patients now</div></div>
+    <div class="card accent-green"><div class="n" id="empty">–</div><div class="l">Empty beds</div><div class="s" id="beds"></div></div>
+    <div class="card accent-amber"><div class="n" id="coming">–</div><div class="l">Coming for admission</div><div class="s" id="admsub"></div></div>
+    <div class="card accent-red"><div class="n" id="disch">–</div><div class="l">Discharged today</div><div class="s" id="dissub"></div></div>
+    <div class="card wide">
+      <div class="l">Bed occupancy</div>
+      <div class="bar"><i id="barfill"></i></div>
+      <div class="row"><span id="occ">–</span><span id="occ2"></span></div>
+    </div>
+  </div>
+  <div class="small">
+    <div class="card"><div class="n" id="acuity">–</div><div class="l">High acuity</div></div>
+    <div class="card"><div class="n" id="procs">–</div><div class="l">Procedures today</div></div>
+  </div>
+</main>
+
+<footer>
+  Numbers only, no patient details. <span id="age"></span>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+function set(id, v){ $(id).textContent = v; }
+
+async function load(){
+  try{
+    const r = await fetch("data.json?_=" + Date.now(), {cache:"no-store"});
+    const d = await r.json();
+    $("demo").style.display = d.demo ? "block" : "none";
+    const empty = Math.max(d.beds - d.patients, 0);
+    const coming = Math.max(d.admissions_expected - d.admissions_received, 0);
+    set("patients", d.patients);
+    set("empty", empty);
+    set("beds", "of " + d.beds + " beds");
+    set("coming", coming);
+    set("admsub", d.admissions_received + " already received");
+    set("disch", d.discharges_done);
+    set("dissub", d.discharges_pending + " still waiting");
+    set("acuity", d.high_acuity);
+    set("procs", d.procedures);
+    const pct = Math.round(100 * d.patients / d.beds);
+    $("barfill").style.width = pct + "%";
+    set("occ", pct + "% full");
+    set("occ2", d.patients + " / " + d.beds);
+    set("sub", (d.shift || "") + " shift · updated " + new Date(d.updated).toLocaleString([], {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit"}));
+    const mins = Math.round((Date.now() - new Date(d.updated)) / 60000);
+    const age = $("age");
+    if (mins > 180){ age.textContent = "Data is " + Math.round(mins/60) + " h old."; age.className = "stale"; }
+    else { age.textContent = ""; age.className = ""; }
+  }catch(e){
+    set("sub", "Could not load the numbers. Pull down to refresh.");
+  }
+}
+load();
+setInterval(load, 60000);          // re-read the numbers every minute
+</script>
+</body>
+</html>
