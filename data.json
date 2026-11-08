@@ -9,5 +9,221 @@
   "discharges_done": 4,
   "discharges_pending": 2,
   "high_acuity": 6,
-  "procedures": 3
+  "procedures": 3,
+  "history": [
+    {
+      "date": "2026-10-10",
+      "patients": 30,
+      "admissions": 8,
+      "discharges": 6
+    },
+    {
+      "date": "2026-10-11",
+      "patients": 31,
+      "admissions": 5,
+      "discharges": 6
+    },
+    {
+      "date": "2026-10-12",
+      "patients": 33,
+      "admissions": 3,
+      "discharges": 3
+    },
+    {
+      "date": "2026-10-13",
+      "patients": 34,
+      "admissions": 5,
+      "discharges": 7
+    },
+    {
+      "date": "2026-10-14",
+      "patients": 34,
+      "admissions": 8,
+      "discharges": 3
+    },
+    {
+      "date": "2026-10-15",
+      "patients": 32,
+      "admissions": 5,
+      "discharges": 4
+    },
+    {
+      "date": "2026-10-16",
+      "patients": 31,
+      "admissions": 2,
+      "discharges": 6
+    },
+    {
+      "date": "2026-10-17",
+      "patients": 29,
+      "admissions": 6,
+      "discharges": 5
+    },
+    {
+      "date": "2026-10-18",
+      "patients": 30,
+      "admissions": 7,
+      "discharges": 7
+    },
+    {
+      "date": "2026-10-19",
+      "patients": 32,
+      "admissions": 7,
+      "discharges": 3
+    },
+    {
+      "date": "2026-10-20",
+      "patients": 34,
+      "admissions": 2,
+      "discharges": 8
+    },
+    {
+      "date": "2026-10-21",
+      "patients": 34,
+      "admissions": 2,
+      "discharges": 2
+    },
+    {
+      "date": "2026-10-22",
+      "patients": 32,
+      "admissions": 3,
+      "discharges": 3
+    },
+    {
+      "date": "2026-10-23",
+      "patients": 34,
+      "admissions": 2,
+      "discharges": 8
+    },
+    {
+      "date": "2026-10-24",
+      "patients": 34,
+      "admissions": 4,
+      "discharges": 5
+    },
+    {
+      "date": "2026-10-25",
+      "patients": 34,
+      "admissions": 8,
+      "discharges": 3
+    },
+    {
+      "date": "2026-10-26",
+      "patients": 34,
+      "admissions": 3,
+      "discharges": 7
+    },
+    {
+      "date": "2026-10-27",
+      "patients": 34,
+      "admissions": 5,
+      "discharges": 2
+    },
+    {
+      "date": "2026-10-28",
+      "patients": 32,
+      "admissions": 5,
+      "discharges": 7
+    },
+    {
+      "date": "2026-10-29",
+      "patients": 32,
+      "admissions": 5,
+      "discharges": 6
+    },
+    {
+      "date": "2026-10-30",
+      "patients": 30,
+      "admissions": 7,
+      "discharges": 4
+    },
+    {
+      "date": "2026-10-31",
+      "patients": 30,
+      "admissions": 8,
+      "discharges": 3
+    },
+    {
+      "date": "2026-11-01",
+      "patients": 32,
+      "admissions": 4,
+      "discharges": 2
+    },
+    {
+      "date": "2026-11-02",
+      "patients": 30,
+      "admissions": 6,
+      "discharges": 8
+    },
+    {
+      "date": "2026-11-03",
+      "patients": 30,
+      "admissions": 5,
+      "discharges": 2
+    },
+    {
+      "date": "2026-11-04",
+      "patients": 29,
+      "admissions": 5,
+      "discharges": 2
+    },
+    {
+      "date": "2026-11-05",
+      "patients": 28,
+      "admissions": 8,
+      "discharges": 7
+    },
+    {
+      "date": "2026-11-06",
+      "patients": 28,
+      "admissions": 3,
+      "discharges": 3
+    },
+    {
+      "date": "2026-11-07",
+      "patients": 29,
+      "admissions": 5,
+      "discharges": 5
+    },
+    {
+      "date": "2026-11-08",
+      "patients": 29,
+      "admissions": 2,
+      "discharges": 4
+    }
+  ],
+  "today_points": [
+    {
+      "label": "07:00",
+      "patients": 31
+    },
+    {
+      "label": "11:00",
+      "patients": 32
+    },
+    {
+      "label": "15:00",
+      "patients": 31
+    },
+    {
+      "label": "19:00",
+      "patients": 30
+    },
+    {
+      "label": "23:00",
+      "patients": 29
+    }
+  ],
+  "today_shifts": [
+    {
+      "label": "Day",
+      "admissions": 1,
+      "discharges": 3
+    },
+    {
+      "label": "Night",
+      "admissions": 1,
+      "discharges": 1
+    }
+  ]
 }
